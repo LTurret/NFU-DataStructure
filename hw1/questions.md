@@ -12,7 +12,7 @@ void copy(int *begin, int *end, int *result) {
     int len = end - begin;
     result = new int[len];
 
-    for (int i=0; i<len; i++) {
+    for (int i = 0; i < len; i++) {
         result[i] = *(begin + i);
     }
 }
@@ -22,7 +22,7 @@ int main() {
     int *cp;
     copy(begin(arr), end(arr), cp);
 
-    for (int i=0; i<5; i++) {
+    for (int i = 0; i < 5; i++) {
         cout << cp[i]; //發生益位或存取NULL
     }
 
@@ -42,14 +42,13 @@ int main() {
 
 using namespace std;
 
-void swap(int& a, int& b) {
-    int* dum = &a;
+void swap(int &a, int &b) {
+    int *dum = &a;
     a = b;
     b = *dum;
 }
 
-void copy(int* begin, int* end, int* result) {
-
+void copy(int *begin, int *end, int *result) {
     int len = end - begin;
 
     for (int i = 0; i < len; i++) {
@@ -62,11 +61,11 @@ int main() {
     int b = 5;
     swap(a, b);
 
-    int arr[] = { 2, 8, 5, 9, 2 };
-    int* cp = new int[sizeof(arr) / sizeof(int)];
+    int arr[] = {2, 8, 5, 9, 2};
+    int *cp = new int[sizeof(arr) / sizeof(int)];
     copy(begin(arr), end(arr), cp);
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < (sizeof(arr) / sizeof(int)); i++) {
         cout << cp[i];
     }
 
@@ -74,4 +73,5 @@ int main() {
 
     return 0;
 }
+
 ```
