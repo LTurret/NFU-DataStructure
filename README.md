@@ -2,9 +2,9 @@
 
 112-1 NFU-CSIE - Data Structure homework archives
 
-> [!WARNING]
-> If you're referencing my code,
-> be low or we are going to die.
+> [!IMPORTANT]
+> My homeworks should not be revealed,  
+> I am really bad with C++ xd.
 
 ## Contents
 
