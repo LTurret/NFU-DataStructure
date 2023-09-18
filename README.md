@@ -8,4 +8,4 @@
 
 ## Contents
 
-- [實作 swap/copy](./hw1/questions.md)
+1. [實作 swap/copy](./hw1/questions.md)
