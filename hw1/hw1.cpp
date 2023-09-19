@@ -3,15 +3,13 @@
 using namespace std;
 
 void swap(int &a, int &b) {
-    int *dum = &a;
+    int dum = a;
     a = b;
-    b = *dum;
+    b = dum;
 }
 
 void copy(int *begin, int *end, int *result) {
-    int len = end - begin;
-
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < (end - begin); i++) {
         result[i] = *(begin + i);
     }
 }
@@ -19,14 +17,20 @@ void copy(int *begin, int *end, int *result) {
 int main() {
     int a = 1;
     int b = 5;
+    cout << "--SWAP--" << endl;
+    cout << "before swap: " << "a=" << a << ", b=" << b << endl;
     swap(a, b);
+    cout << "after swap: " << "a=" << a << ", b=" << b << endl;
+
+    cout << endl;
+    cout << "--COPY--" << endl;
 
     int arr[] = {2, 8, 5, 9, 2};
     int *cp = new int[sizeof(arr) / sizeof(int)];
     copy(begin(arr), end(arr), cp);
 
     for (int i = 0; i < (sizeof(arr) / sizeof(int)); i++) {
-        cout << cp[i];
+        cout << cp[i] << " ";
     }
 
     delete[] cp;
