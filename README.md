@@ -1,4 +1,4 @@
-# NFU-DataStructures
+# NFU-DataStructure
 
 112-1 NFU-CSIE - Data Structure homework archives
 
