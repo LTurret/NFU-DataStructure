@@ -1,11 +1,16 @@
 # Questions
 
+## Improvement
+
+> [!WARNING]
+> 這演算法非常北爛，建議是重寫
+
+請用真正的 ADT 寫齁，這啥小
+
 ## Source code
 
 > [!NOTE]
 > 以下 code 已成功實作
-> [!WARNING]
-> 這演算法非常北爛，建議是重寫
 
 ### [hw2.cpp](./hw2.cpp)
 
