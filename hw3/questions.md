@@ -12,7 +12,7 @@
 > [!NOTE]
 > 以下 code 已成功實作
 
-### [hw2.cpp](./hw2.cpp)
+### [hw3.cpp](./hw3.cpp)
 
 ```cpp
 #include<iostream>
