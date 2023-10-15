@@ -45,7 +45,6 @@ int main() {
 
     perm(a, k, m);
 }
-
 ```
 
 ```console
