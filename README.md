@@ -14,3 +14,4 @@
 4. [手寫 recursive, sort](./hw4/questions.md)
 5. [阿卡曼函數 Ackermann's function](./hw5/1/questions.md)
 6. [冪集合 Power set](./hw5/2/questions.md)
+7. [](./hw6/questions.md)
