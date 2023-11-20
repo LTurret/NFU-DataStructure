@@ -16,4 +16,3 @@
 6. [冪集合 Power set](./hw5/2/questions.md)
 7. [多項式 Polynomial](./hw6/questions.md)
 8. [堆疊 Stack](./hw7/questionos.md)
-

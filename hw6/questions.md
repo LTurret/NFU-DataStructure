@@ -7,106 +7,150 @@
 ### [hw6.cpp](./hw6.cpp)
 
 ```cpp
-#include <iostream>
-#include <cmath>
 #include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <ostream>
 
 using namespace std;
 
 class Polynomial;
-class Term {
+class Term
+{
     friend Polynomial;
-    private:
-        int expo;
-        int coef;
+    friend ostream &operator<<(ostream &os, const Polynomial &polynomial);
+
+private:
+    float coef;
+    int exp;
 };
 
-class Polynomial {
-    public:
-        Polynomial();
-        void show_poly();
-        void new_term(const int expo, const int coef);
-        int solve(const int x);
-    private:
-        Term *term_array;
-        int capacity;
-        int terms;
-        int show_terms();
-        void expand_capacity(const int capacity, const Term *term_array);
+class Polynomial
+{
+    friend ostream &operator<<(ostream &os, const Polynomial &polynomial);
+
+public:
+    Polynomial();
+    Polynomial Add(Polynomial polynomial);
+    Polynomial Mult(Polynomial polynomial);
+    float Eval(const float parameter);
+    void new_term(const float coef, const int exp);
+
+private:
+    Term *term_array;
+    int capacity;
+    int terms;
 };
 
-Polynomial::Polynomial():capacity(1), terms(0) {
+ostream &operator<<(ostream &os, const Polynomial &polynomial)
+{
+    for (int i = 0; i < polynomial.terms; i++)
+    {
+        os << "(" << polynomial.term_array[i].coef << ", " << polynomial.term_array[i].exp << ")";
+    }
+    return os;
+}
+
+Polynomial::Polynomial() : capacity(1), terms(0)
+{
     term_array = new Term[capacity];
 }
 
-inline void Polynomial::show_poly() {
-    for (int i = 0; i < terms; i++) {
-        cout << term_array[i].coef << "x^" << term_array[i].expo << ", ";
-    }
-    cout << endl;
-}
-
-inline int Polynomial::show_terms() {
-    return this -> terms;
-}
-
-inline int Polynomial::solve(const int x) {
-    int result = 0;
-    for (int i = 0; i < terms; i++) {
-        result += pow(x, term_array[i].expo) * this -> term_array[i].coef;
+Polynomial Polynomial::Add(Polynomial polynomial)
+{
+    Polynomial result;
+    int p1 = 0, p2 = 0;
+    while ((p1 <= this->terms) && (p2 <= polynomial.terms))
+    {
+        if ((this->term_array[p1].exp) == (polynomial.term_array[p2].exp))
+        {
+            result.new_term((this->term_array[p1].coef + polynomial.term_array[p2].coef), this->term_array[p1].exp);
+            p1++, p2++;
+        }
+        else if ((this->term_array[p1].exp) > (polynomial.term_array[p2].exp))
+        {
+            result.new_term((this->term_array[p1].exp), (this->term_array[p1].exp));
+            p1++;
+        }
+        else
+        {
+            result.new_term((polynomial.term_array[p2].coef), (polynomial.term_array[p2].exp));
+            p2++;
+        }
     }
     return result;
 }
 
-inline void Polynomial::expand_capacity(const int capacity, const Term *term_array) {
-    cout << "size reallocating..." << endl;
-    
-    this -> capacity *= 2;
-    Term *dummy = new Term[capacity*2];
-
-    for (int i = 0; i < capacity; i++) {
-        dummy[i] = term_array[i];
+Polynomial Polynomial::Mult(Polynomial polynomial)
+{
+    Polynomial result;
+    int maximun = polynomial.term_array[0].exp + this->term_array[0].exp;
+    for (int i = maximun; i >= 0; i--)
+    {
+        result.new_term(0, i);
     }
-
-    term_array = dummy;
-    delete []dummy;
+    for (int i = 0; i < this->terms; i++)
+    {
+        for (int j = 0; j < polynomial.terms; j++)
+        {
+            int curr = this->term_array[i].exp + polynomial.term_array[j].exp;
+            result.term_array[maximun - curr].coef += (this->term_array[i].coef * polynomial.term_array[j].coef);
+        }
+    }
+    return result;
 }
 
-inline void Polynomial::new_term(const int coef, const int expo) {
-    if (terms == capacity) {
-        expand_capacity(capacity, term_array);
+float Polynomial::Eval(const float parameter)
+{
+    // remember do not just leave a blank variable, it will cause chaos.
+    float result = 0.0;
+    for (int i = 0; i < terms; i++)
+    {
+        result += term_array[i].coef * pow(parameter, term_array[i].exp);
     }
-
-    Term new_term;
-    new_term.expo = expo;
-    new_term.coef = coef;
-
-    cout << "new term: " << coef << "x^" << expo << ". terms: " << this -> terms+1 << endl;
-
-    term_array[terms] = new_term;
-    terms++;
+    return result;
 }
 
-int main() {
-    Polynomial poly;
-    poly.new_term(3, 4);
-    poly.new_term(-5, 3);
-    poly.new_term(2, 1);
-    poly.new_term(-7, 0);
-    poly.show_poly();
-    cout << poly.solve(0) << endl;
+void Polynomial::new_term(const float coef, const int exp)
+{
+    if (terms == capacity)
+    {
+        int new_size = capacity * 2;
+        Term *temp_array = new Term[new_size];
+        copy(term_array, term_array + terms, temp_array);
+        capacity = new_size;
+        delete[] term_array;
+        term_array = temp_array;
+    }
+
+    term_array[terms].coef = coef;
+    term_array[terms++].exp = exp;
+}
+
+int main()
+{
+    Polynomial p1, p2;
+    p1.new_term(2, 2);
+    p1.new_term(3, 1);
+    p1.new_term(-2, 0);
+
+    p2.new_term(4, 3);
+    p2.new_term(12, 2);
+    p2.new_term(3, 1);
+    cout << "p1: " << p1 << ", p2: " << p2 << endl;
+    cout << p1.Eval(3) << endl;
+
+    cout << p1.Add(p2) << endl;
+
+    cout << p1.Mult(p2) << endl;
 }
 ```
 
 ```console
 $ g++ main.cpp -O2
 $ ./a.out
-new term: 3x^4. terms: 1
-size reallocating...
-new term: -5x^3. terms: 2
-size reallocating...
-new term: 2x^1. terms: 3
-new term: -7x^0. terms: 4
-3x^4, -5x^3, 2x^1, -7x^0,
--7
+p1: (2, 2)(3, 1)(-2, 0), p2: (4, 3)(12, 2)(3, 1)
+25
+(4, 3)(14, 2)(6, 1)(-2, 0)
+(8, 5)(36, 4)(34, 3)(-15, 2)(-6, 1)(0, 0)
 ```
