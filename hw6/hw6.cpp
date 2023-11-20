@@ -5,7 +5,6 @@
 
 using namespace std;
 
-class Polynomial;
 class Term
 {
     friend Polynomial;
@@ -28,9 +27,9 @@ public:
     void new_term(const float coef, const int exp);
 
 private:
-    int terms;
-    int capacity;
     Term *term_array;
+    int capacity;
+    int terms;
 };
 
 ostream &operator<<(ostream &os, const Polynomial &polynomial)
@@ -72,9 +71,24 @@ Polynomial Polynomial::Add(Polynomial polynomial)
     return result;
 }
 
-// Polynomial Polynomial::Mult(Polynomial polynomial) {
-//
-// }
+Polynomial Polynomial::Mult(Polynomial polynomial)
+{
+    Polynomial result;
+    int maximun = polynomial.term_array[0].exp + this->term_array[0].exp;
+    for (int i = maximun; i >= 0; i--)
+    {
+        result.new_term(0, i);
+    }
+    for (int i = 0; i < this->terms; i++)
+    {
+        for (int j = 0; j < polynomial.terms; j++)
+        {
+            int curr = this->term_array[i].exp + polynomial.term_array[j].exp;
+            result.term_array[maximun - curr].coef += (this->term_array[i].coef * polynomial.term_array[j].coef);
+        }
+    }
+    return result;
+}
 
 float Polynomial::Eval(const float parameter)
 {
@@ -117,4 +131,6 @@ int main()
     cout << p1.Eval(3) << endl;
 
     cout << p1.Add(p2) << endl;
+
+    cout << p1.Mult(p2) << endl;
 }
