@@ -5,6 +5,7 @@
 
 using namespace std;
 
+class Polynomial;
 class Term
 {
     friend Polynomial;
