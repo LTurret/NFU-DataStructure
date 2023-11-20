@@ -15,4 +15,4 @@
 5. [阿卡曼函數 Ackermann's function](./hw5/1/questions.md)
 6. [冪集合 Power set](./hw5/2/questions.md)
 7. [多項式 Polynomial](./hw6/questions.md)
-8. [堆疊 Stack](./hw7/questionos.md)
+8. [堆疊 Stack](./hw7/questions.md)
