@@ -1,10 +1,12 @@
 #include <algorithm>
+#include <chrono>
 #include <cmath>
 #include <iostream>
 #include <istream>
 #include <ostream>
 
 using namespace std;
+using namespace std::chrono;
 
 class Polynomial;
 class Term {
@@ -69,57 +71,21 @@ Polynomial Polynomial::Add(Polynomial polynomial) {
     Polynomial result;
     int p1 = 0, p2 = 0;
     while ((p1 <= this->terms) && (p2 <= polynomial.terms)) {
+        float coef;
+        int exp;
         if ((this->term_array[p1].exp) == (polynomial.term_array[p2].exp)) {
-            float coef = this->term_array[p1].coef + polynomial.term_array[p2].coef;
-            int exp = this->term_array[p1].exp;
-            if (result.terms == result.capacity) {
-                int new_size = result.capacity * 2;
-                Term *temp_array = new Term[new_size];
-                copy(result.term_array, result.term_array + result.terms, temp_array);
-                result.capacity = new_size;
-                delete[] result.term_array;
-                result.term_array = temp_array;
-            }
-            result.term_array[result.terms].coef = coef;
-            result.term_array[result.terms++].exp = exp;
+            coef = this->term_array[p1].coef + polynomial.term_array[p2].coef;
+            exp = this->term_array[p1].exp;
             p1++, p2++;
         } else if ((this->term_array[p1].exp) > (polynomial.term_array[p2].exp)) {
-            float coef = this->term_array[p1].coef;
-            int exp = this->term_array[p1].exp;
-            if (result.terms == result.capacity) {
-                int new_size = result.capacity * 2;
-                Term *temp_array = new Term[new_size];
-                copy(result.term_array, result.term_array + result.terms, temp_array);
-                result.capacity = new_size;
-                delete[] result.term_array;
-                result.term_array = temp_array;
-            }
-            result.term_array[result.terms].coef = coef;
-            result.term_array[result.terms++].exp = exp;
+            coef = this->term_array[p1].coef;
+            exp = this->term_array[p1].exp;
             p1++;
         } else {
-            float coef = polynomial.term_array[p2].coef;
-            int exp = polynomial.term_array[p2].exp;
-            if (result.terms == result.capacity) {
-                int new_size = result.capacity * 2;
-                Term *temp_array = new Term[new_size];
-                copy(result.term_array, result.term_array + result.terms, temp_array);
-                result.capacity = new_size;
-                delete[] result.term_array;
-                result.term_array = temp_array;
-            }
-            result.term_array[result.terms].coef = coef;
-            result.term_array[result.terms++].exp = exp;
+            coef = polynomial.term_array[p2].coef;
+            exp = polynomial.term_array[p2].exp;
             p2++;
         }
-    }
-    return result;
-}
-
-Polynomial Polynomial::Mult(Polynomial polynomial) {
-    Polynomial result;
-    int maximun = polynomial.term_array[0].exp + this->term_array[0].exp;
-    for (int i = maximun; i >= 0; i--) {
         if (result.terms == result.capacity) {
             int new_size = result.capacity * 2;
             Term *temp_array = new Term[new_size];
@@ -128,6 +94,17 @@ Polynomial Polynomial::Mult(Polynomial polynomial) {
             delete[] result.term_array;
             result.term_array = temp_array;
         }
+        result.term_array[result.terms].coef = coef;
+        result.term_array[result.terms++].exp = exp;
+    }
+    return result;
+}
+
+Polynomial Polynomial::Mult(Polynomial polynomial) {
+    Polynomial result;
+    result.term_array = new Term[this->capacity * polynomial.capacity];
+    int maximun = polynomial.term_array[0].exp + this->term_array[0].exp;
+    for (int i = maximun; i >= 0; i--) {
         result.term_array[result.terms].coef = 0;
         result.term_array[result.terms++].exp = i;
     }
@@ -150,7 +127,7 @@ float Polynomial::Eval(const float parameter) {
 
 int main() {
     Polynomial p1, p2;
-    int c1, c2;
+    int c1, c2, x = 5;
     cout << "determin c1: ";
     cin >> c1;
     cout << "p1: ";
@@ -178,7 +155,14 @@ int main() {
 
     cout << endl << "p1: " << p1 << ", p2: " << p2 << endl << endl;
 
+    auto start = high_resolution_clock::now();
     cout << "Add: " << p1.Add(p2) << endl;
     cout << "Mult: " << p1.Mult(p2) << endl;
-    cout << "Eval: " << p1.Eval(3) << endl;
+
+    cout << "f(x), x=";
+    // cin >> x;
+    cout << "Eval: " << p1.Eval(x) << endl;
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+    cout << duration.count() << " ms" << endl;
 }
