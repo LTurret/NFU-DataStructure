@@ -16,3 +16,11 @@
 6. [冪集合 Power set](./hw5/2/questions.md)
 7. [多項式 Polynomial](./hw6/questions.md)
 8. [堆疊 Stack](./hw7/questions.md)
+9. [佇列 Queue](./hw8/questions.md)
+10. [鏈結串列 Linked List](./hw9/questions.md)
+
+## Todo
+
+1. Available Lists
+2. Chain
+3. Iterator
