@@ -14,7 +14,7 @@ class Term {
     friend ostream &operator<<(ostream &os, const Polynomial &polynomial);
     friend istream &operator>>(istream &in, Polynomial &polynomial);
 
-  private:
+   private:
     float coef;
     int exp;
 };
@@ -23,13 +23,13 @@ class Polynomial {
     friend ostream &operator<<(ostream &os, const Polynomial &polynomial);
     friend istream &operator>>(istream &in, Polynomial &polynomial);
 
-  public:
+   public:
     Polynomial();
     Polynomial Add(Polynomial polynomial);
     Polynomial Mult(Polynomial polynomial);
     float Eval(const float parameter);
 
-  private:
+   private:
     Term *term_array;
     int capacity;
     int terms;
