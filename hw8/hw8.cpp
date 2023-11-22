@@ -3,16 +3,15 @@
 
 using namespace std;
 
-template <typename T>
-class Queue {
-   public:
+template <typename T> class Queue {
+  public:
     Queue();
     void push(T);
     T pop();
     bool is_empty();
     bool is_full();
 
-   private:
+  private:
     int capacity;
     int size;
     int front;
@@ -25,8 +24,7 @@ Queue<T>::Queue() : capacity(5), front(0), rear(0), size(0) {
     arr = new T[capacity];
 }
 
-template <typename T>
-T Queue<T>::pop() {
+template <typename T> T Queue<T>::pop() {
     if (is_empty()) {
         throw "queue is empty";
     }
@@ -34,8 +32,7 @@ T Queue<T>::pop() {
     return arr[front++];
 }
 
-template <typename T>
-void Queue<T>::push(T data) {
+template <typename T> void Queue<T>::push(T data) {
     if (is_full()) {
         throw "queue is max";
     }
@@ -43,13 +40,11 @@ void Queue<T>::push(T data) {
     size++;
 }
 
-template <typename T>
-bool Queue<T>::is_empty() {
+template <typename T> bool Queue<T>::is_empty() {
     return front == rear ? true : false;
 }
 
-template <typename T>
-bool Queue<T>::is_full() {
+template <typename T> bool Queue<T>::is_full() {
     return rear % capacity == front && size == capacity ? true : false;
 }
 
