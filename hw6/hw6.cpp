@@ -14,7 +14,7 @@ class Term {
     friend ostream &operator<<(ostream &os, const Polynomial &polynomial);
     friend istream &operator>>(istream &in, Polynomial &polynomial);
 
-   private:
+  private:
     float coef;
     int exp;
 };
@@ -23,13 +23,13 @@ class Polynomial {
     friend ostream &operator<<(ostream &os, const Polynomial &polynomial);
     friend istream &operator>>(istream &in, Polynomial &polynomial);
 
-   public:
+  public:
     Polynomial();
     Polynomial Add(Polynomial polynomial);
     Polynomial Mult(Polynomial polynomial);
     float Eval(const float parameter);
 
-   private:
+  private:
     Term *term_array;
     int capacity;
     int terms;
@@ -38,7 +38,8 @@ class Polynomial {
 ostream &operator<<(ostream &os, const Polynomial &polynomial) {
     for (int i = 0; i < polynomial.terms; i++) {
         if (polynomial.term_array[i].coef != 0) {
-            os << "(" << polynomial.term_array[i].coef << ", " << polynomial.term_array[i].exp << ")";
+            os << "(" << polynomial.term_array[i].coef << ", "
+               << polynomial.term_array[i].exp << ")";
         }
     }
     return os;
@@ -53,7 +54,8 @@ istream &operator>>(istream &in, Polynomial &polynomial) {
     if (polynomial.terms == polynomial.capacity) {
         int new_size = polynomial.capacity * 2;
         Term *temp = new Term[new_size];
-        copy(polynomial.term_array, polynomial.term_array + polynomial.terms, temp);
+        copy(polynomial.term_array, polynomial.term_array + polynomial.terms,
+             temp);
         polynomial.capacity = new_size;
         delete[] polynomial.term_array;
         polynomial.term_array = temp;
@@ -65,7 +67,9 @@ istream &operator>>(istream &in, Polynomial &polynomial) {
     return in;
 }
 
-Polynomial::Polynomial() : capacity(4), terms(0) { term_array = new Term[capacity]; }
+Polynomial::Polynomial() : capacity(4), terms(0) {
+    term_array = new Term[capacity];
+}
 
 Polynomial Polynomial::Add(Polynomial polynomial) {
     Polynomial result;
@@ -77,7 +81,8 @@ Polynomial Polynomial::Add(Polynomial polynomial) {
             coef = this->term_array[p1].coef + polynomial.term_array[p2].coef;
             exp = this->term_array[p1].exp;
             p1++, p2++;
-        } else if ((this->term_array[p1].exp) > (polynomial.term_array[p2].exp)) {
+        } else if ((this->term_array[p1].exp) >
+                   (polynomial.term_array[p2].exp)) {
             coef = this->term_array[p1].coef;
             exp = this->term_array[p1].exp;
             p1++;
@@ -89,7 +94,8 @@ Polynomial Polynomial::Add(Polynomial polynomial) {
         if (result.terms == result.capacity) {
             int new_size = result.capacity * 2;
             Term *temp_array = new Term[new_size];
-            copy(result.term_array, result.term_array + result.terms, temp_array);
+            copy(result.term_array, result.term_array + result.terms,
+                 temp_array);
             result.capacity = new_size;
             delete[] result.term_array;
             result.term_array = temp_array;
@@ -111,7 +117,8 @@ Polynomial Polynomial::Mult(Polynomial polynomial) {
     for (int i = 0; i < this->terms; i++) {
         for (int j = 0; j < polynomial.terms; j++) {
             int curr = this->term_array[i].exp + polynomial.term_array[j].exp;
-            result.term_array[maximun - curr].coef += (this->term_array[i].coef * polynomial.term_array[j].coef);
+            result.term_array[maximun - curr].coef +=
+                (this->term_array[i].coef * polynomial.term_array[j].coef);
         }
     }
     return result;
