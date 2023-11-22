@@ -6,13 +6,13 @@ class Chain;
 class Node {
     friend Chain;
 
-   public:
+  public:
     int value;
     int &link;
 };
 
 class Chain {
-   public:
+  public:
     void insert(int);
 };
 
