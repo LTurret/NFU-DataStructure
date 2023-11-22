@@ -1,45 +1,35 @@
 #include <iostream>
 using namespace std;
 
-int BinarySearch(int *arr, int target, const int n)
-{
+int BinarySearch(int *arr, int target, const int n) {
     // Implement binary search
     int left, right, middle;
     left = 0;
     right = n - 1;
-    for (int i = 0; i < 10000; i++)
-    {
+    for (int i = 0; i < 10000; i++) {
         middle = (left + right) / 2;
 
-        if (arr[middle] == target)
-        {
+        if (arr[middle] == target) {
             return middle + 1;
         }
 
-        if (target < arr[middle])
-        {
+        if (target < arr[middle]) {
             right = middle - 1;
-        }
-        else if (target > arr[middle])
-        {
+        } else if (target > arr[middle]) {
             left = middle + 1;
         }
 
-        if (arr[middle] == target)
-        {
+        if (arr[middle] == target) {
             return middle + 1;
         }
     }
     return -1;
 }
 
-int main()
-{
-    while (true)
-    {
+int main() {
+    while (true) {
         int input[2] = {};
-        for (int i = 0; i < 2; i++)
-        {
+        for (int i = 0; i < 2; i++) {
             cin >> input[i];
         }
 
@@ -48,8 +38,7 @@ int main()
 
         int arr[input[0]] = {};
 
-        for (int i = 0; i < input[0]; i++)
-        {
+        for (int i = 0; i < input[0]; i++) {
             cin >> arr[i];
         }
 
