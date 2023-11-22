@@ -2,16 +2,11 @@
 
 using namespace std;
 
-int ack(int m, int n)
-{
-    while (m)
-    {
-        if (n == 0)
-        {
+int ack(int m, int n) {
+    while (m) {
+        if (n == 0) {
             return ack(m - 1, 1);
-        }
-        else
-        {
+        } else {
             return ack(m - 1, ack(m, n - 1));
         }
         m--;
@@ -19,8 +14,7 @@ int ack(int m, int n)
     return n + 1;
 }
 
-int main(void)
-{
+int main(void) {
     cout << ack(0, 0) << endl;
     cout << ack(0, 1) << endl;
     cout << ack(1, 0) << endl;
