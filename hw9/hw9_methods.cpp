@@ -3,21 +3,20 @@
 using namespace std;
 
 class ChainNode {
-
-  public:
-    ChainNode(int data, ChainNode *next);
+   public:
+    ChainNode(int data = 0, ChainNode *next = 0);
     void Create2();
     int data;
     ChainNode *next;
 };
 
-ChainNode::ChainNode(int data = 10, ChainNode *next = 0) {
+ChainNode::ChainNode(int data, ChainNode *next) {
     this->data = data;
     this->next = next;
 }
 
 void ChainNode::Create2() {
-    ChainNode *second = new ChainNode(20, 0);
+    ChainNode *second = new ChainNode(10, 0);
     next = second;
 }
 
