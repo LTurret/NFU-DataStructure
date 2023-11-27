@@ -2,37 +2,32 @@
 
 using namespace std;
 
-template <typename T> class Node {
-
-  public:
-    T data;
-    Node *next;
-};
-
-template <typename T> class ChainNode {
-
-  public:
-    ChainNode(int data, ChainNode *next);
+template <class T>
+class ChainNode {
+   public:
+    ChainNode(T data = 0, ChainNode *next = 0);
     void Create2();
-
-  private:
     T data;
-    Node<T> *next;
+    ChainNode *next;
 };
 
-template <typename T>
-ChainNode<T>::ChainNode(int data = 0, ChainNode<T> *next = 0) {
-    data = data;
-    next = next;
+template <class T>
+ChainNode<T>::ChainNode(T data, ChainNode *next) {
+    this->data = data;
+    this->next = next;
 }
 
-template <typename T> void ChainNode<T>::Create2() {
-    T = data;
-    ChainNode *second = new ChainNode(10, 0);
-    ChainNode first(20, second);
+template <class T>
+void ChainNode<T>::Create2() {
+    ChainNode<int> *second = new ChainNode(10, 0);
+    next = second;
 }
 
 int main() {
-    ChainNode<int> first;
-    first.Create2();
+    ChainNode<int> head;
+    cout << head.data << endl;
+
+    head.Create2();
+    head = *head.next;
+    cout << head.data << endl;
 }
