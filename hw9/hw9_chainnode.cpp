@@ -14,6 +14,8 @@ class ChainNode {
   public:
     ChainNode(int data, ChainNode *next);
     void Create2();
+
+  private:
     int data;
     Node *next;
 };
