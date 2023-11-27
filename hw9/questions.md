@@ -4,4 +4,4 @@
 
 ## Source code
 
-### [ChainNoed](./hw9_chainnode.cpp)
+### [ChainNode](./hw9_chainnode.cpp)
