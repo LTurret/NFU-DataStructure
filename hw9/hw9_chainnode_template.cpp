@@ -5,29 +5,19 @@ using namespace std;
 template <class T>
 class ChainNode {
    public:
-    ChainNode(T data = 0, ChainNode *next = 0);
-    void Create2();
+    ChainNode(T data = 0) : next(0) { this->data = data; };
     T data;
     ChainNode *next;
 };
 
 template <class T>
-ChainNode<T>::ChainNode(T data, ChainNode *next) {
-    this->data = data;
-    this->next = next;
-}
-
-template <class T>
-void ChainNode<T>::Create2() {
-    ChainNode<int> *second = new ChainNode(10, 0);
-    next = second;
-}
+class Chain {
+   public:
+    Chain() { this->first = 0; };
+    ChainNode<T> *first;
+};
 
 int main() {
-    ChainNode<int> head;
-    cout << head.data << endl;
-
-    head.Create2();
-    head = *head.next;
-    cout << head.data << endl;
+    ChainNode<int> n1(21);
+    cout << n1.data;
 }
