@@ -71,16 +71,12 @@ int Chain<T>::index(T element) {
     ChainNode<T> *curr = first;
     int i = 0;
 
-    while (curr != NULL && curr->data != element) {
+    while (curr != 0 && curr->data != element) {
         curr = curr->next;
         i++;
     }
 
-    if (curr == NULL) {
-        return -1;
-    } else {
-        return i;
-    }
+    return (curr == 0) ? i : -1;
 }
 
 int main() {
