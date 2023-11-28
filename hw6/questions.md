@@ -4,6 +4,9 @@
 
 ## Source code
 
+> [!NOTE]
+> 以下 code 已成功實作
+
 ### [hw6.cpp](./hw6.cpp)
 
 ```cpp

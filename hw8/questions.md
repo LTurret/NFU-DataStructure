@@ -4,6 +4,9 @@
 
 ## Source code
 
+> [!NOTE]
+> 以下 code 已成功實作
+
 ### [hw8.cpp](./hw8.cpp)
 
 ```cpp

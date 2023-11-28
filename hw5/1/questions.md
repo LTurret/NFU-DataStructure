@@ -7,6 +7,7 @@
 ## Source code
 
 > [!NOTE]
+> 以下 code 已成功實作
 > 詳細解題報告請至 Notion 版裡
 
 ### [hw5-1.cpp](./hw5-1.cpp)
