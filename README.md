@@ -2,8 +2,16 @@
 
 112-1 NFU-CSIE - Data Structure homework archives
 
+> [!TIP]
+> This is tip
+
+> [!WARNING]
+> This is warning
+
+> [!NOTE]
+> This is note
+
 > [!IMPORTANT]
-> My homeworks should not be revealed,  
 > I am really bad with C++ xd.
 
 ## Contents
