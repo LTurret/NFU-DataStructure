@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <istream>
 #include <ostream>
@@ -33,6 +34,7 @@ class Polynomial {
         head = new Node();
         head->link = head;
     };
+    float Evaluate(float x) const;
 
    private:
     Node *head;
@@ -74,6 +76,16 @@ ostream &operator<<(ostream &os, Polynomial &poly) {
         }
     }
     return os;
+};
+
+float Polynomial::Evaluate(float x) const {
+    float sum;
+    Node *ptr = this->head;
+    while (ptr->link != this->head) {
+        ptr = ptr->link;
+        sum += ptr->coef * pow(x, ptr->exp);
+    }
+    return sum;
 };
 
 int main() {
