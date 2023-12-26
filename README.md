@@ -4,12 +4,21 @@
 
 > [!TIP]
 > This is tip
-> > [!WARNING]
-> > This is warning
-> > > [!NOTE]
-> > > This is note
-> > > > [!IMPORTANT]
-> > > > xd
+
+really important warning
+
+> [!WARNING]
+> This is warning
+
+really important note
+
+> [!NOTE]
+> his is note
+
+really important important
+
+> [!IMPORTANT]
+> xd
 
 ## Contents
 
