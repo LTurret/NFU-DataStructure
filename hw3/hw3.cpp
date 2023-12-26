@@ -6,21 +6,15 @@ int BinarySearch(int *arr, int target, const int n) {
     int left, right, middle;
     left = 0;
     right = n - 1;
-    for (int i = 0; i < 10000; i++) {
+    while (left <= right) {
         middle = (left + right) / 2;
-
-        if (arr[middle] == target) {
-            return middle + 1;
-        }
 
         if (target < arr[middle]) {
             right = middle - 1;
         } else if (target > arr[middle]) {
             left = middle + 1;
-        }
-
-        if (arr[middle] == target) {
-            return middle + 1;
+        } else {
+            return middle;
         }
     }
     return -1;
@@ -33,15 +27,15 @@ int main() {
             cin >> input[i];
         }
 
-        if (input[0] == 0)
-            return 0;
+        if (input[0] == 0) return 0;
 
-        int arr[input[0]] = {};
+        int *arr;
+        arr = new int[input[0]];
 
         for (int i = 0; i < input[0]; i++) {
             cin >> arr[i];
         }
 
-        cout << BinarySearch(arr, input[1], input[0]) << endl;
+        cout << BinarySearch(arr, input[1], input[0]) + 1 << endl;
     }
 }
