@@ -23,7 +23,7 @@ really important important
 ## Contents
 
 1. [實作 swap/copy](./hw1/questions.md)
-2. [實作 intersection sort](./hw2/questions.md)
+2. [實作 insertionn sort](./hw2/questions.md)
 3. [實作 binary search](./hw3/questions.md)
 4. [手寫 recursive, sort](./hw4/questions.md)
 5. [阿卡曼函數 Ackermann's function](./hw5/1/questions.md)
