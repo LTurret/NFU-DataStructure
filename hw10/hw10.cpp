@@ -30,10 +30,29 @@ class Polynomial {
     friend ostream &operator<<(ostream &os, Polynomial &poly);
 
    public:
-    Polynomial() {
+   // Standard Constructor
+    inline Polynomial() {
         head = new Node();
         head->link = head;
     };
+
+    // Copy Constructor
+    inline Polynomial(const Polynomial &poly) {
+        Node *ptr = poly.head;
+        ptr = ptr->link;
+
+        head = new Node();
+        Node *tail = new Node(ptr->coef, ptr->exp, head);
+        head->link = tail;
+
+        while (ptr->link != poly.head) {
+            ptr = ptr->link;
+            tail->link = new Node(ptr->coef, ptr->exp, head);
+            tail = tail->link;
+        }
+    };
+
+    // Calculates the polynomial
     float Evaluate(float x) const;
 
    private:
@@ -41,12 +60,15 @@ class Polynomial {
 };
 
 istream &operator>>(istream &is, Polynomial &poly) {
+    cout << "Start creating your polynomial." << endl
+    << "Determin n-th terms: ";
     int n;
     is >> n;
     if (n == 0) throw "Polynomial cannot has 0 term.";
     Node *tail = nullptr;
     for (int i = 0; i < n; i++) {
         int coef, exp;
+        cout << "Enter term (coef, exp): ";
         is >> coef >> exp;
         if (exp < 0) throw "Exponent cannot assign less than 0.";
         if (poly.head->link == poly.head) {
@@ -91,5 +113,7 @@ float Polynomial::Evaluate(float x) const {
 int main() {
     Polynomial poly;
     cin >> poly;
-    cout << poly;
+    cout << endl << poly << endl;
+    Polynomial cp(poly);
+    cout << cp << endl;
 }
